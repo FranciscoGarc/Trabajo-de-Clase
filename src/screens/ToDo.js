@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function ToDo({ navigation, route }) {
+export default function ToDo() {
     const [task, setTask] = useState('');
     const [taskList, setTaskList] = useState([]);
-    const goTo = () => {
-        // Navegar a DetailsScreen y pasar un parámetro
-        navigation.navigate('Calculadora', { itemId: 1, otherParam: 'Ejemplo' });
+    const navigation = useNavigation();
+
+    const goToScreen2 = () => {
+      navigation.navigate('Calculadora');
     };
 
     const handleAddTask = () => {
@@ -24,14 +26,16 @@ export default function ToDo({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <Button title="Ir" onPress={goTo} />
-            <Text style={styles.title}>To-Do App</Text>
+            <Button 
+            title="Ir a calculadora" 
+            onPress={goToScreen2} />
+            <Text style={styles.title}>To-Do</Text>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => setTask(text)}
                     value={task}
-                    placeholder="Enter a task"
+                    placeholder="Agregar una tarea"
                 />
                 <TouchableOpacity style={styles.addButton} onPress={handleAddTask}>
                     <Text style={styles.addButtonText}>+</Text>
@@ -43,7 +47,7 @@ export default function ToDo({ navigation, route }) {
                     <View style={styles.taskContainer}>
                         <Text style={styles.taskText}>{item}</Text>
                         <TouchableOpacity style={styles.deleteButton} onPress={() => handleDeleteTask(index)}>
-                            <Text style={styles.deleteButtonText}>Delete</Text>
+                            <Text style={styles.deleteButtonText}>Borrar</Text>
                         </TouchableOpacity>
                     </View>
                 )}

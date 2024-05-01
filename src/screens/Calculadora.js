@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
 import Boton from '../components/boton';
 import Input from '../components/input';
 
-export default function Calculadora({ route, navigation }) {
+export default function Calculadora() {
 
     //escribir codigo Js
     //State de la aplicación
@@ -38,9 +37,10 @@ export default function Calculadora({ route, navigation }) {
         }
     }
 
-    const goTo = () => {
-        // Navegar a DetailsScreen y pasar un parámetro
-        navigation.navigate('ToDo');
+    const navigation = useNavigation();
+
+    const goToToDo = () => {
+      navigation.navigate('ToDo');
     };
 
     const limpiar = () => {
@@ -53,7 +53,7 @@ export default function Calculadora({ route, navigation }) {
         <View style={styles.container}>
             <Boton
                 texto={'Ir a ToDo'}
-                funcion={goTo}
+                funcion={goToToDo}
                 colorEnviado='pink'
             />
             <Text style={styles.H1}>Suma de numeros</Text>
